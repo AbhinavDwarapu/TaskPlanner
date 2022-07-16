@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    "prettier"
+  ],
+  "extends": [
+    "airbnb",
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/function-component-definition": 0,
+    "react/jsx-filename-extension": 0
+  }
+}
