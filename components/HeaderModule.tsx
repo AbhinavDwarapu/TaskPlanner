@@ -1,14 +1,11 @@
 import { Burger, Header, MediaQuery } from "@mantine/core";
 
-type headerProps = {
+interface headerProps {
   opened: boolean;
   setOpened: any;
-};
+}
 
-export default function HeaderModule({
-  opened,
-  setOpened,
-}: headerProps): JSX.Element {
+const HeaderModule = ({ opened, setOpened }: headerProps): JSX.Element => {
   return (
     <Header height={70} p="md">
       <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
@@ -24,4 +21,6 @@ export default function HeaderModule({
       </div>
     </Header>
   );
-}
+};
+
+export default HeaderModule;

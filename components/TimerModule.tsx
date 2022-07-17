@@ -1,9 +1,11 @@
 import { Box } from "@mantine/core";
 
-export default function TimerModule(): JSX.Element {
+const TimerModule = (): JSX.Element => {
   return (
     <Box>
       <div>Timer</div>
     </Box>
   );
-}
+};
+
+export default TimerModule;

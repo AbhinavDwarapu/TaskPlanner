@@ -1,9 +1,11 @@
 import { Box } from "@mantine/core";
 
-export default function CurrentTasks(): JSX.Element {
+const CurrentTasks = (): JSX.Element => {
   return (
     <Box>
       <div>Current Task</div>
     </Box>
   );
-}
+};
+
+export default CurrentTasks;
