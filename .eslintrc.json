@@ -10,6 +10,20 @@
   "rules": {
     "prettier/prettier": "error",
     "react/function-component-definition": 0,
-    "react/jsx-filename-extension": 0
+    "react/jsx-filename-extension": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "globals": {
+    "React": true,
+    "JSX": true
   }
 }
