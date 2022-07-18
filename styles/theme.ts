@@ -2,7 +2,7 @@ const theme = {
   breakpoints: {
     xs: 300,
     sm: 500,
-    md: 1000,
+    md: 800,
     lg: 1200,
     xl: 1400,
   },

@@ -49,8 +49,8 @@ const TimerModule = ({
   // logger.info(timerTime.getHours());
 
   return (
-    <MediaQuery smallerThan="sm" styles={{ width: "250px" }}>
-      <Box sx={{ margin: "auto", width: "45%" }}>
+    <MediaQuery smallerThan="md" styles={{ width: "250px" }}>
+      <Box sx={{ margin: "auto", width: "40%" }}>
         <SegmentedControl
           fullWidth
           radius="md"
@@ -64,10 +64,18 @@ const TimerModule = ({
             { label: "Break", value: "break" },
           ]}
         />
-        <Box sx={{ backgroundColor: "red" }}>
-          {padZero(minutes)} {padZero(seconds)}
-        </Box>
-        <Button fullWidth onClick={handleClick}>
+        <MediaQuery smallerThan="md" styles={{ fontSize: "5rem" }}>
+          <Center
+            sx={{
+              backgroundColor: "red",
+              height: "200px",
+              fontSize: "6rem",
+            }}
+          >
+            {padZero(minutes)} {padZero(seconds)}
+          </Center>
+        </MediaQuery>
+        <Button sx={{ width: "80%" }} onClick={handleClick}>
           {startButton}
         </Button>
       </Box>
