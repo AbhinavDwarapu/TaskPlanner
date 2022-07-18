@@ -1,8 +1,8 @@
 import { MediaQuery, Navbar } from "@mantine/core";
 
-type navigationProps = {
+interface navigationProps {
   opened: boolean;
-};
+}
 const Navigation = ({ opened }: navigationProps): JSX.Element => {
   return (
     <MediaQuery largerThan="sm" styles={{ display: "none" }}>
