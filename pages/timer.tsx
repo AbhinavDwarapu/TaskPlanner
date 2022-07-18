@@ -51,7 +51,9 @@ const TimePage: NextPage = () => {
       <Stack sx={{ textAlign: "center" }}>
         <TimerModule
           seconds={seconds}
+          setSeconds={setSeconds}
           minutes={minutes}
+          setMinutes={setMinutes}
           timeToggle={timeToggle}
           setTimeToggle={setTimeToggle}
         />

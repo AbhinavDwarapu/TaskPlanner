@@ -1,12 +1,20 @@
 /* eslint-disable react/jsx-no-bind */
 
-import { Box, Button, MediaQuery, SegmentedControl } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Center,
+  MediaQuery,
+  SegmentedControl,
+} from "@mantine/core";
 import { Dispatch, SetStateAction, useState } from "react";
 // import logger from "../utils/logger";
 
 interface timerProps {
   seconds: number;
+  setSeconds: Dispatch<SetStateAction<number>>;
   minutes: number;
+  setMinutes: Dispatch<SetStateAction<number>>;
   timeToggle: boolean;
   setTimeToggle: Dispatch<SetStateAction<boolean>>;
 }
@@ -20,7 +28,9 @@ function padZero(integer: number): string {
 
 const TimerModule = ({
   seconds,
+  setSeconds,
   minutes,
+  setMinutes,
   timeToggle,
   setTimeToggle,
 }: timerProps): JSX.Element => {
@@ -77,6 +87,17 @@ const TimerModule = ({
         </MediaQuery>
         <Button sx={{ width: "80%" }} onClick={handleClick}>
           {startButton}
+        </Button>
+        <Button
+          sx={{ width: "20%", backgroundColor: "pink" }}
+          onClick={() => {
+            setTimeToggle(false);
+            setMinutes(45);
+            setSeconds(0);
+            setStartButton("Start");
+          }}
+        >
+          X
         </Button>
       </Box>
     </MediaQuery>
