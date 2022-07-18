@@ -1,8 +1,9 @@
 import { Burger, Header, MediaQuery } from "@mantine/core";
+import { Dispatch, SetStateAction } from "react";
 
 interface headerProps {
   opened: boolean;
-  setOpened: any;
+  setOpened: Dispatch<SetStateAction<boolean>>;
 }
 
 const HeaderModule = ({ opened, setOpened }: headerProps): JSX.Element => {
@@ -12,7 +13,7 @@ const HeaderModule = ({ opened, setOpened }: headerProps): JSX.Element => {
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={opened}
-            onClick={() => setOpened((o: boolean) => !o)}
+            onClick={() => setOpened((o) => !o)}
             size="sm"
             mr="xl"
           />
