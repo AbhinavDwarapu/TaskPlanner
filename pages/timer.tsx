@@ -14,8 +14,8 @@ const TimePage: NextPage = () => {
   const [opened, setOpened] = useState(false);
 
   // Only minutes and seconds are relevant
-  const [seconds, setSeconds] = useState(2);
-  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(45);
   const [timeToggle, setTimeToggle] = useState(false);
 
   useEffect(() => {
