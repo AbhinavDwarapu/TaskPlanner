@@ -42,8 +42,16 @@ const TimerModule = ({
     setSegment(e);
     if (e === "timer") {
       setSegmentColour("blue");
+      setTimeToggle(false);
+      setMinutes(45);
+      setSeconds(0);
+      setStartButton("Start");
     } else {
       setSegmentColour("red");
+      setTimeToggle(false);
+      setMinutes(25);
+      setSeconds(0);
+      setStartButton("Start");
     }
   }
 
@@ -57,6 +65,20 @@ const TimerModule = ({
   }
 
   // logger.info(timerTime.getHours());
+
+  function handleReset() {
+    if (segment === "timer") {
+      setTimeToggle(false);
+      setMinutes(45);
+      setSeconds(0);
+      setStartButton("Start");
+    } else {
+      setTimeToggle(false);
+      setMinutes(25);
+      setSeconds(0);
+      setStartButton("Start");
+    }
+  }
 
   return (
     <MediaQuery smallerThan="md" styles={{ width: "250px" }}>
@@ -90,14 +112,9 @@ const TimerModule = ({
         </Button>
         <Button
           sx={{ width: "20%", backgroundColor: "pink" }}
-          onClick={() => {
-            setTimeToggle(false);
-            setMinutes(45);
-            setSeconds(0);
-            setStartButton("Start");
-          }}
+          onClick={handleReset}
         >
-          X
+          Reset
         </Button>
       </Box>
     </MediaQuery>
