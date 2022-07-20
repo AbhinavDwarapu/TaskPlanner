@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import { AppShell, Stack } from "@mantine/core";
 import { useEffect, useState } from "react";
-import logger from "../utils/logger";
+// import logger from "../utils/logger";
+import { TaskObj } from "../utils/types";
 
 import Navigation from "../components/AppShell/Navigation";
 import TimerModule from "../components/TimerModule";
@@ -12,8 +13,7 @@ import HeaderModule from "../components/AppShell/HeaderModule";
 
 const TimePage: NextPage = () => {
   const [opened, setOpened] = useState(false);
-
-  // Only minutes and seconds are relevant
+  const [tasks, setTasks] = useState<TaskObj[]>([]);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(45);
   const [timeToggle, setTimeToggle] = useState(false);
@@ -35,7 +35,6 @@ const TimePage: NextPage = () => {
       }, 1000);
     }
 
-    logger.info(seconds);
     return () => {
       clearInterval(timer);
     };
@@ -51,14 +50,19 @@ const TimePage: NextPage = () => {
       <Stack sx={{ textAlign: "center" }}>
         <TimerModule
           seconds={seconds}
-          setSeconds={setSeconds}
           minutes={minutes}
-          setMinutes={setMinutes}
           timeToggle={timeToggle}
+          setSeconds={setSeconds}
+          setMinutes={setMinutes}
           setTimeToggle={setTimeToggle}
         />
 
-        <CurrentTasks />
+        <CurrentTasks
+          minutes={minutes}
+          seconds={seconds}
+          tasks={tasks}
+          setTasks={setTasks}
+        />
         <TaskLake />
       </Stack>
     </AppShell>

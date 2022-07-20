@@ -12,10 +12,10 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 interface timerProps {
   seconds: number;
-  setSeconds: Dispatch<SetStateAction<number>>;
   minutes: number;
-  setMinutes: Dispatch<SetStateAction<number>>;
   timeToggle: boolean;
+  setSeconds: Dispatch<SetStateAction<number>>;
+  setMinutes: Dispatch<SetStateAction<number>>;
   setTimeToggle: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -85,7 +85,7 @@ const TimerModule = ({
       <Box sx={{ margin: "auto", width: "40%" }}>
         <SegmentedControl
           fullWidth
-          radius="md"
+          // radius="md"
           size="lg"
           value={segment}
           onChange={handleSegment}
