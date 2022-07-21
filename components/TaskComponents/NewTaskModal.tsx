@@ -52,8 +52,8 @@ const NewTimerModal = ({
     const data: TaskFormObj = {
       name: e.currentTarget.task.value,
       description: e.currentTarget.description.value,
-      startTime: e.currentTarget.time.value,
-      date: timeValue,
+      startTime: timeValue,
+      date: e.currentTarget.date.value,
     };
 
     // Data validation
