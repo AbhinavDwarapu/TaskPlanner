@@ -1,7 +1,12 @@
-export interface TaskObj {
-  id: string;
+export interface TaskFormObj {
   name: string;
-  startTime: Date;
-  endTime: Date;
-  done: boolean;
+  description?: string;
+  date?: Date;
+  startTime?: [Date, Date];
+  duration?: string;
+  done?: boolean;
+}
+
+export interface TaskObj extends TaskFormObj {
+  id: string;
 }
