@@ -21,12 +21,17 @@ const CurrentTasks = ({
 
   function completeTask(e: ChangeEvent<HTMLInputElement>) {
     const tempTasks = [...tasks];
-    tempTasks.forEach((task) => {
+    tempTasks.forEach((task, index, array) => {
+      let tempTask;
       if (e.target.id === task.id && e.target.checked) {
-        task.done = true;
+        tempTask = task;
+        tempTask.done = true;
+        array.splice(index, 1, tempTask);
       }
       if (e.target.id === task.id && !e.target.checked) {
-        task.done = false;
+        tempTask = task;
+        tempTask.done = false;
+        array.splice(index, 1, tempTask);
       }
     });
     setTasks(tempTasks);
