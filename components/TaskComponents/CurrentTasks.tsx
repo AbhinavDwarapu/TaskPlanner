@@ -1,7 +1,8 @@
-import { Box, Button, Checkbox, MediaQuery } from "@mantine/core";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { TaskObj } from "../utils/types";
-import logger from "../utils/logger";
+import { Box, Button, Checkbox, MediaQuery, Space } from "@mantine/core";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { TaskObj } from "../../utils/types";
+// import logger from "../../utils/logger";
+import NewTaskModal from "./NewTaskModal";
 
 interface tasksProps {
   minutes: number;
@@ -16,22 +17,9 @@ const CurrentTasks = ({
   tasks,
   setTasks,
 }: tasksProps): JSX.Element => {
-  function createTask() {
-    const tempTask: TaskObj = {
-      name: "new Task",
-      id: new Date().getTime().toString(),
-      endTime: new Date(),
-      startTime: new Date(),
-      done: false,
-    };
-    const tempTasks = [...tasks, tempTask];
-    setTasks(tempTasks);
-    logger.info(tasks);
-  }
+  const [opened, setOpened] = useState(false);
 
   function completeTask(e: ChangeEvent<HTMLInputElement>) {
-    logger.info(e.target.id);
-    logger.info(e.target.checked);
     const tempTasks = [...tasks];
     tempTasks.forEach((task) => {
       if (e.target.id === task.id && e.target.checked) {
@@ -54,7 +42,6 @@ const CurrentTasks = ({
     setTasks(tempTasks);
   }
 
-  // @ts-ignore
   return (
     <MediaQuery smallerThan="md" styles={{ width: "250px" }}>
       <Box sx={{ margin: "auto", width: "40%", backgroundColor: "lightcoral" }}>
@@ -67,7 +54,7 @@ const CurrentTasks = ({
             return (
               <Box key={task.id}>
                 <Box sx={{ textDecoration: strike }}>
-                  {task.name} with id: {task.id}
+                  Task: {task.name} with id: {task.id}.
                 </Box>
                 <Checkbox id={task.id} onClick={completeTask} />
                 <Button id={task.id} onClick={deleteTask}>
@@ -77,9 +64,20 @@ const CurrentTasks = ({
             );
           })}
         </Box>
-        <Button fullWidth onClick={createTask}>
+        <Space h="md" />
+        <Button
+          onClick={() => {
+            setOpened(true);
+          }}
+        >
           Create New Task
         </Button>
+        <NewTaskModal
+          opened={opened}
+          setOpened={setOpened}
+          tasks={tasks}
+          setTasks={setTasks}
+        />
       </Box>
     </MediaQuery>
   );
