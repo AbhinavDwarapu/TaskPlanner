@@ -28,10 +28,10 @@ function padZero(integer: number): string {
 
 const TimerModule = ({
   seconds,
-  setSeconds,
   minutes,
-  setMinutes,
   timeToggle,
+  setSeconds,
+  setMinutes,
   setTimeToggle,
 }: timerProps): JSX.Element => {
   const [segment, setSegment] = useState("timer");

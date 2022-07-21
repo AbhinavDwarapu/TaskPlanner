@@ -6,8 +6,8 @@ import { TaskObj } from "../utils/types";
 
 import Navigation from "../components/AppShell/Navigation";
 import TimerModule from "../components/TimerModule";
-import CurrentTasks from "../components/CurrentTasks";
-import TaskLake from "../components/TaskLake";
+import CurrentTasks from "../components/TaskComponents/CurrentTasks";
+import TaskLake from "../components/TaskComponents/TaskLake";
 import FooterModule from "../components/AppShell/FooterModule";
 import HeaderModule from "../components/AppShell/HeaderModule";
 
