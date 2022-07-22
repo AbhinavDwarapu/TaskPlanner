@@ -46,6 +46,9 @@ const TimePage: NextPage = () => {
       footer={<FooterModule />}
       header={<HeaderModule opened={opened} setOpened={setOpened} />}
       navbar={<Navigation opened={opened} />}
+      sx={(theme) => ({
+        backgroundColor: theme.colors.custom[0],
+      })}
     >
       <Stack sx={{ textAlign: "center" }}>
         <TimerModule
@@ -56,13 +59,13 @@ const TimePage: NextPage = () => {
           setMinutes={setMinutes}
           setTimeToggle={setTimeToggle}
         />
-
         <CurrentTasks
           minutes={minutes}
           seconds={seconds}
           tasks={tasks}
           setTasks={setTasks}
         />
+
         <TaskLake />
       </Stack>
     </AppShell>
