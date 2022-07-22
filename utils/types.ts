@@ -2,7 +2,7 @@ export interface TaskFormObj {
   name: string;
   description?: string;
   date?: Date;
-  startTime?: [Date, Date];
+  startTime?: Date;
   duration?: string;
   done?: boolean;
 }
