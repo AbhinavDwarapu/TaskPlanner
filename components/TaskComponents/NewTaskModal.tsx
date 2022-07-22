@@ -15,8 +15,12 @@ import {
   useState,
 } from "react";
 import { DatePicker, TimeInput } from "@mantine/dates";
+import { HiClock } from "react-icons/hi";
+import { BsFillCalendar2CheckFill } from "react-icons/bs";
+import { MdTaskAlt, MdDescription } from "react-icons/md";
+import { AiFillCheckCircle } from "react-icons/ai";
 
-// import logger from "../../utils/logger";
+import logger from "../../utils/logger";
 import { TaskFormObj, TaskObj } from "../../utils/types";
 
 interface Props {
@@ -33,6 +37,7 @@ const NewTimerModal = ({
   setTasks,
 }: Props): JSX.Element => {
   const [timeValue, setTimeValue] = useState(new Date());
+
   const [taskError, setTaskError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
   const [timeError, setTimeError] = useState("");
@@ -76,6 +81,7 @@ const NewTimerModal = ({
       done: false,
     };
 
+    logger.info(data.date);
     const tempTasks = [...tasks, tempTask];
     setTasks(tempTasks);
     setOpened(false);
@@ -91,12 +97,16 @@ const NewTimerModal = ({
       transitionDuration={350}
       transitionTimingFunction="ease"
       overlayOpacity={0.55}
+      // sx={(theme) => ({
+      //   backgroundColor: theme.colors.ocean[3],
+      // })}
     >
       <form onSubmit={submitForm}>
         <InputWrapper>
           <TextInput
             label="Task Name"
             id="task"
+            icon={<AiFillCheckCircle />}
             placeholder="Your task name"
             required
             error={taskError}
@@ -105,16 +115,17 @@ const NewTimerModal = ({
             description="optional"
             label="Description"
             id="description"
+            icon={<MdDescription />}
             placeholder="Your description"
             autosize
-            minRows={2}
-            maxRows={4}
+            minRows={1}
+            maxRows={3}
             error={descriptionError}
           />
           <TimeInput
             label="Pick Time"
             placeholder="Pick time"
-            // icon={<Clock size={16} />}
+            icon={<HiClock />}
             defaultValue={new Date()}
             id="time"
             clearable
@@ -129,6 +140,7 @@ const NewTimerModal = ({
             placeholder="Pick date"
             label="Event Date"
             id="date"
+            icon={<BsFillCalendar2CheckFill />}
             defaultValue={new Date()}
             description="optional"
             error={dateError}
