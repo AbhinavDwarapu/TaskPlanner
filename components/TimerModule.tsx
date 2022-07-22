@@ -4,10 +4,13 @@ import {
   Box,
   Button,
   Center,
+  Grid,
   MediaQuery,
   SegmentedControl,
+  Space,
 } from "@mantine/core";
 import { Dispatch, SetStateAction, useState } from "react";
+import { GrPowerReset } from "react-icons/gr";
 // import logger from "../utils/logger";
 
 interface timerProps {
@@ -35,13 +38,13 @@ const TimerModule = ({
   setTimeToggle,
 }: timerProps): JSX.Element => {
   const [segment, setSegment] = useState("timer");
-  const [segmentColour, setSegmentColour] = useState("blue");
+  const [segmentColour, setSegmentColour] = useState("theme.colors.custom[9]");
   const [startButton, setStartButton] = useState("Start");
 
   function handleSegment(e: string) {
     setSegment(e);
     if (e === "timer") {
-      setSegmentColour("blue");
+      setSegmentColour("theme.colors.custom[9]");
       setTimeToggle(false);
       setMinutes(45);
       setSeconds(0);
@@ -85,37 +88,62 @@ const TimerModule = ({
       <Box sx={{ margin: "auto", width: "40%" }}>
         <SegmentedControl
           fullWidth
-          // radius="md"
+          radius={24}
           size="lg"
           value={segment}
           onChange={handleSegment}
-          color={segmentColour}
+          // color={segmentColour}
           transitionDuration={300}
+          sx={(theme) => ({
+            backgroundColor: theme.colors.custom[1],
+          })}
           data={[
             { label: "Timer", value: "timer" },
             { label: "Break", value: "break" },
           ]}
         />
+        <Space h="md" />
         <MediaQuery smallerThan="md" styles={{ fontSize: "5rem" }}>
           <Center
-            sx={{
-              backgroundColor: "red",
+            sx={(theme) => ({
+              backgroundColor: theme.colors.custom[1],
               height: "200px",
               fontSize: "6rem",
-            }}
+              borderRadius: "24px",
+            })}
           >
             {padZero(minutes)} {padZero(seconds)}
           </Center>
         </MediaQuery>
-        <Button sx={{ width: "80%" }} onClick={handleClick}>
-          {startButton}
-        </Button>
-        <Button
-          sx={{ width: "20%", backgroundColor: "pink" }}
-          onClick={handleReset}
-        >
-          Reset
-        </Button>
+        <Space h="md" />
+        <Grid grow columns={10}>
+          <Grid.Col span={8}>
+            <Button
+              sx={() => ({
+                height: "48px",
+                borderRadius: "24px",
+              })}
+              fullWidth
+              color="custom"
+              onClick={handleClick}
+            >
+              {startButton}
+            </Button>
+          </Grid.Col>
+          <Grid.Col span={2}>
+            <Button
+              fullWidth
+              sx={() => ({
+                height: "48px",
+                borderRadius: "24px",
+              })}
+              color="custom2"
+              onClick={handleReset}
+            >
+              <GrPowerReset />
+            </Button>
+          </Grid.Col>
+        </Grid>
       </Box>
     </MediaQuery>
   );
