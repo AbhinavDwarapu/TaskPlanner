@@ -6,9 +6,9 @@ import { TaskObj } from "../utils/types";
 
 import Navigation from "../components/AppShell/Navigation";
 import TimerModule from "../components/TimerModule";
-import CurrentTasks from "../components/TaskComponents/CurrentTasks";
+import TasksContainer from "../components/TaskComponents/TasksContainer";
 import TaskLake from "../components/TaskComponents/TaskLake";
-import FooterModule from "../components/AppShell/FooterModule";
+// import FooterModule from "../components/AppShell/FooterModule";
 import HeaderModule from "../components/AppShell/HeaderModule";
 
 const TimePage: NextPage = () => {
@@ -43,7 +43,7 @@ const TimePage: NextPage = () => {
   return (
     <AppShell
       fixed
-      footer={<FooterModule />}
+      // footer={<FooterModule />}
       header={<HeaderModule opened={opened} setOpened={setOpened} />}
       navbar={<Navigation opened={opened} />}
       sx={(theme) => ({
@@ -59,7 +59,7 @@ const TimePage: NextPage = () => {
           setMinutes={setMinutes}
           setTimeToggle={setTimeToggle}
         />
-        <CurrentTasks
+        <TasksContainer
           minutes={minutes}
           seconds={seconds}
           tasks={tasks}
