@@ -12,6 +12,7 @@ import {
 import { Dispatch, SetStateAction, useState } from "react";
 import { GrPowerReset } from "react-icons/gr";
 // import logger from "../utils/logger";
+import padZero from "../utils/timeFormat";
 
 interface timerProps {
   seconds: number;
@@ -20,13 +21,6 @@ interface timerProps {
   setSeconds: Dispatch<SetStateAction<number>>;
   setMinutes: Dispatch<SetStateAction<number>>;
   setTimeToggle: Dispatch<SetStateAction<boolean>>;
-}
-
-function padZero(integer: number): string {
-  if (integer < 10) {
-    return `0${integer}`;
-  }
-  return integer.toString();
 }
 
 const TimerModule = ({
@@ -84,8 +78,8 @@ const TimerModule = ({
   }
 
   return (
-    <MediaQuery smallerThan="md" styles={{ width: "250px" }}>
-      <Box sx={{ margin: "auto", width: "40%" }}>
+    <MediaQuery largerThan="md" styles={{ width: "700px" }}>
+      <Box sx={{ margin: "auto", width: "90%" }}>
         <SegmentedControl
           fullWidth
           radius={24}
@@ -110,6 +104,7 @@ const TimerModule = ({
               height: "200px",
               fontSize: "6rem",
               borderRadius: "24px",
+              color: theme.colors.custom[9],
             })}
           >
             {padZero(minutes)} {padZero(seconds)}
