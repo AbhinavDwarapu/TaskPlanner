@@ -17,7 +17,7 @@ import {
 import { DatePicker, TimeInput } from "@mantine/dates";
 import { HiClock } from "react-icons/hi";
 import { BsFillCalendar2CheckFill } from "react-icons/bs";
-import { MdTaskAlt, MdDescription } from "react-icons/md";
+import { MdDescription } from "react-icons/md";
 import { AiFillCheckCircle } from "react-icons/ai";
 
 import logger from "../../utils/logger";
@@ -76,6 +76,7 @@ const NewTimerModal = ({
     const tempTask: TaskObj = {
       id: Math.floor(new Date().getTime() * Math.random()).toString(),
       name: data.name,
+      description: data.description,
       date: data.date,
       startTime: data.startTime,
       done: false,
