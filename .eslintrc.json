@@ -1,10 +1,7 @@
 {
-  "plugins": [
-    "prettier"
-  ],
   "extends": [
-    "airbnb",
     "next/core-web-vitals",
+    "airbnb",
     "plugin:prettier/recommended",
     "plugin:cypress/recommended"
   ],
