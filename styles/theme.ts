@@ -19,6 +19,7 @@ const theme = {
     //   "#128797",
     //   "#147885",
     // ],
+    // Material Main
     main: [
       "#E1F5FE",
       "#B3E5FC",
@@ -31,6 +32,7 @@ const theme = {
       "#0277BD",
       "#01579B",
     ],
+
     custom_cyan: [
       "#E0F7FA",
       "#B2EBF2",
