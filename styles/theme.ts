@@ -1,4 +1,6 @@
-const theme = {
+import { MantineThemeOverride } from "@mantine/core";
+
+const theme: MantineThemeOverride = {
   breakpoints: {
     xs: 280,
     sm: 500,
