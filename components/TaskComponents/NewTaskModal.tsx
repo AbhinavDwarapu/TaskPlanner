@@ -98,9 +98,18 @@ const NewTimerModal = ({
       transitionDuration={350}
       transitionTimingFunction="ease"
       overlayOpacity={0.55}
-      // sx={(theme) => ({
-      //   backgroundColor: theme.colors.ocean[3],
-      // })}
+      color="main"
+      styles={(theme) => ({
+        modal: {
+          borderRadius: "24px",
+        },
+        body: {
+          color: theme.colors.main[9],
+        },
+        header: {
+          text: theme.colors.main[9],
+        },
+      })}
     >
       <form onSubmit={submitForm}>
         <InputWrapper>
@@ -147,7 +156,11 @@ const NewTimerModal = ({
             error={dateError}
           />
           <Space h="md" />
-          <Button sx={{ float: "right" }} type="submit">
+          <Button
+            sx={{ float: "right", borderRadius: "24px" }}
+            color="custom_green"
+            type="submit"
+          >
             Create Task
           </Button>
         </InputWrapper>

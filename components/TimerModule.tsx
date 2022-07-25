@@ -15,6 +15,8 @@ import { GrPowerReset } from "react-icons/gr";
 import { IoMdPause } from "react-icons/io";
 import { FaPlay } from "react-icons/fa";
 import padZero from "../utils/timeFormat";
+import theme from "../styles/theme";
+import logger from "../utils/logger";
 
 interface timerProps {
   seconds: number;
@@ -35,19 +37,20 @@ const TimerModule = ({
 }: timerProps): JSX.Element => {
   const [segment, setSegment] = useState("timer");
   const [segmentColour, setSegmentColour] =
-    useState<DefaultMantineColor>("main");
+    useState<DefaultMantineColor>("custom_green");
   const [startButton, setStartButton] = useState(<FaPlay />);
 
   function handleSegment(e: string) {
     setSegment(e);
     if (e === "timer") {
-      setSegmentColour("theme.colors.custom[9]");
+      setSegmentColour("custom_green");
+      logger.info(theme.colors.main[5]);
       setTimeToggle(false);
       setMinutes(45);
       setSeconds(0);
       setStartButton(<FaPlay />);
     } else {
-      setSegmentColour("red");
+      setSegmentColour("custom_red");
       setTimeToggle(false);
       setMinutes(25);
       setSeconds(0);
@@ -87,10 +90,10 @@ const TimerModule = ({
           size="lg"
           value={segment}
           onChange={handleSegment}
-          // color={segmentColour}
+          color={segmentColour}
           transitionDuration={300}
-          sx={(theme) => ({
-            backgroundColor: theme.colors.custom[1],
+          sx={(t) => ({
+            backgroundColor: t.colors.main[1],
           })}
           data={[
             { label: "Timer", value: "timer" },
@@ -100,12 +103,12 @@ const TimerModule = ({
         <Space h="md" />
         <MediaQuery smallerThan="md" styles={{ fontSize: "5rem" }}>
           <Center
-            sx={(theme) => ({
-              backgroundColor: theme.colors.custom[1],
+            sx={(t) => ({
+              backgroundColor: t.colors.main[1],
               height: "200px",
               fontSize: "6rem",
               borderRadius: "24px",
-              color: theme.colors.custom[9],
+              color: t.colors.main[9],
             })}
           >
             {padZero(minutes)} {padZero(seconds)}
@@ -120,7 +123,7 @@ const TimerModule = ({
                 borderRadius: "24px",
               })}
               fullWidth
-              color="custom"
+              color="main"
               onClick={handleClick}
             >
               {startButton}
@@ -133,7 +136,7 @@ const TimerModule = ({
                 height: "48px",
                 borderRadius: "24px",
               })}
-              color="custom2"
+              color="custom_red"
               onClick={handleReset}
             >
               <GrPowerReset />

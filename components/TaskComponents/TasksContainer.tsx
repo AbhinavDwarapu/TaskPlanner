@@ -28,7 +28,7 @@ const TasksContainer = ({
           sx={(theme) => ({
             margin: "auto",
             width: "90%",
-            backgroundColor: theme.colors.custom[1],
+            backgroundColor: theme.colors.main[1],
             borderRadius: "24px",
           })}
         >
@@ -55,7 +55,7 @@ const TasksContainer = ({
       </MediaQuery>
       <MediaQuery largerThan="md" styles={{ width: "700px" }}>
         <Button
-          color="custom"
+          color="main"
           onClick={() => {
             setOpened(true);
           }}
