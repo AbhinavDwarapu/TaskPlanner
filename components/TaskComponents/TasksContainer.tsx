@@ -1,57 +1,25 @@
-import { Box, Button, Divider, Group, MediaQuery } from "@mantine/core";
+import { Box, Button, MediaQuery } from "@mantine/core";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { MdDelete } from "react-icons/md";
-import { FaCheckCircle } from "react-icons/fa";
 import { TaskObj } from "../../utils/types";
-import logger from "../../utils/logger";
+// import logger from "../../utils/logger";
 import NewTaskModal from "./NewTaskModal";
 
-import padZero from "../../utils/timeFormat";
+import TaskPanel from "./TaskPanel";
 
 interface tasksProps {
-  minutes: number;
-  seconds: number;
+  // minutes: number;
+  // seconds: number;
   tasks: TaskObj[];
   setTasks: Dispatch<SetStateAction<TaskObj[]>>;
 }
 
 const TasksContainer = ({
-  /* eslint-disable no-unused-vars */
-  minutes,
-  seconds,
+  // minutes,
+  // seconds,
   tasks,
   setTasks,
 }: tasksProps): JSX.Element => {
   const [opened, setOpened] = useState(false);
-
-  function completeTask(e: React.MouseEvent<HTMLInputElement>) {
-    const tempTasks = [...tasks];
-    tempTasks.forEach((task, index, array) => {
-      let tempTask;
-      if (e.currentTarget.id === task.id && !task.done) {
-        logger.info("Setting Done True");
-        tempTask = task;
-        tempTask.done = true;
-        array.splice(index, 1, tempTask);
-      } else if (e.currentTarget.id === task.id && task.done) {
-        logger.info("Setting Done False");
-        tempTask = task;
-        tempTask.done = false;
-        array.splice(index, 1, tempTask);
-      }
-    });
-    setTasks(tempTasks);
-  }
-
-  function deleteTask(e) {
-    const tempTasks = [...tasks];
-    tempTasks.forEach((task, index, array) => {
-      if (e.currentTarget.id === task.id) {
-        array.splice(index, 1);
-      }
-    });
-    setTasks(tempTasks);
-  }
 
   return (
     <>
@@ -66,94 +34,15 @@ const TasksContainer = ({
         >
           <Box>
             {tasks.map((task) => {
-              let strike: string;
-              if (task.done) {
-                strike = "line-through";
-              }
-              const date = task.date?.toString();
-              let timeString;
-              if (task.startTime) {
-                const hoursTime = padZero(task.startTime.getHours());
-                const minutesTime = padZero(task.startTime.getMinutes());
-                timeString = `At ${hoursTime}:${minutesTime}`;
-              }
-
               return (
-                <Box
+                <TaskPanel
                   key={task.id}
-                  sx={(theme) => ({
-                    backgroundColor: theme.colors.custom[0],
-                    borderRadius: "24px",
-                    margin: 8,
-                    padding: 16,
-                  })}
-                >
-                  <Box
-                    sx={(theme) => ({
-                      textDecoration: strike,
-                      fontSize: "2rem",
-                      color: theme.colors.custom[9],
-                    })}
-                  >
-                    {task.name}
-                  </Box>
-                  <Box
-                    sx={(theme) => ({
-                      color: theme.colors.custom[1],
-                      fontSize: "0.75rem",
-                    })}
-                  >
-                    ID: {task.id}
-                  </Box>
-                  <Box
-                    sx={(theme) => ({
-                      color: theme.colors.custom[2],
-                      fontSize: "0.9rem",
-                    })}
-                  >
-                    {date}
-                  </Box>
-                  <Box
-                    sx={(theme) => ({
-                      color: theme.colors.custom[2],
-                      fontSize: "0.9rem",
-                    })}
-                  >
-                    {timeString}
-                  </Box>
-
-                  <Divider
-                    my="sm"
-                    sx={(theme) => ({
-                      borderTopColor: theme.colors.custom[1],
-                    })}
-                  />
-                  <Box sx={{ textAlign: "left" }}>{task.description}</Box>
-                  <Group position="center" grow>
-                    <Button
-                      id={task.id}
-                      onClick={(e) => {
-                        completeTask(e);
-                      }}
-                      variant="subtle"
-                    >
-                      <FaCheckCircle />
-                    </Button>
-                    <Button
-                      id={task.id}
-                      onClick={(e) => {
-                        deleteTask(e);
-                      }}
-                      variant="subtle"
-                    >
-                      <MdDelete />
-                    </Button>
-                  </Group>
-                </Box>
+                  task={task}
+                  tasks={tasks}
+                  setTasks={setTasks}
+                />
               );
             })}
-
-            {/* <Box sx={{ marginBottom: 8 }} /> */}
           </Box>
 
           <NewTaskModal
