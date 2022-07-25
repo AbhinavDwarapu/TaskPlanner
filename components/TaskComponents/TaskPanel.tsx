@@ -65,7 +65,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
   return (
     <Box
       sx={(theme) => ({
-        backgroundColor: theme.colors.custom[0],
+        backgroundColor: theme.colors.main[0],
         borderRadius: "24px",
         margin: 8,
         padding: 16,
@@ -75,14 +75,14 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
         sx={(theme) => ({
           textDecoration: strike,
           fontSize: "2rem",
-          color: theme.colors.custom[9],
+          color: theme.colors.main[9],
         })}
       >
         {task.name}
       </Box>
       <Box
         sx={(theme) => ({
-          color: theme.colors.custom[1],
+          color: theme.colors.main[1],
           fontSize: "0.75rem",
         })}
       >
@@ -90,7 +90,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
       </Box>
       <Box
         sx={(theme) => ({
-          color: theme.colors.custom[2],
+          color: theme.colors.main[2],
           fontSize: "0.9rem",
         })}
       >
@@ -98,7 +98,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
       </Box>
       <Box
         sx={(theme) => ({
-          color: theme.colors.custom[2],
+          color: theme.colors.main[2],
           fontSize: "0.9rem",
         })}
       >
@@ -108,13 +108,13 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
       <Divider
         my="sm"
         sx={(theme) => ({
-          borderTopColor: theme.colors.custom[1],
+          borderTopColor: theme.colors.main[1],
         })}
       />
       <Box
         sx={(theme) => ({
           textAlign: "justify",
-          color: theme.colors.custom[9],
+          color: theme.colors.main[9],
         })}
       >
         {task.description}
