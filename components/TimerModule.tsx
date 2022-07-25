@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Center,
+  DefaultMantineColor,
   Grid,
   MediaQuery,
   SegmentedControl,
@@ -11,7 +12,8 @@ import {
 } from "@mantine/core";
 import { Dispatch, SetStateAction, useState } from "react";
 import { GrPowerReset } from "react-icons/gr";
-// import logger from "../utils/logger";
+import { IoMdPause } from "react-icons/io";
+import { FaPlay } from "react-icons/fa";
 import padZero from "../utils/timeFormat";
 
 interface timerProps {
@@ -32,8 +34,9 @@ const TimerModule = ({
   setTimeToggle,
 }: timerProps): JSX.Element => {
   const [segment, setSegment] = useState("timer");
-  const [segmentColour, setSegmentColour] = useState("theme.colors.custom[9]");
-  const [startButton, setStartButton] = useState("Start");
+  const [segmentColour, setSegmentColour] =
+    useState<DefaultMantineColor>("main");
+  const [startButton, setStartButton] = useState(<FaPlay />);
 
   function handleSegment(e: string) {
     setSegment(e);
@@ -42,38 +45,36 @@ const TimerModule = ({
       setTimeToggle(false);
       setMinutes(45);
       setSeconds(0);
-      setStartButton("Start");
+      setStartButton(<FaPlay />);
     } else {
       setSegmentColour("red");
       setTimeToggle(false);
       setMinutes(25);
       setSeconds(0);
-      setStartButton("Start");
+      setStartButton(<FaPlay />);
     }
   }
 
   function handleClick() {
     setTimeToggle(!timeToggle);
-    if (startButton === "Start") {
-      setStartButton("Pause");
+    if (startButton.type === (<IoMdPause />).type) {
+      setStartButton(<FaPlay />);
     } else {
-      setStartButton("Start");
+      setStartButton(<IoMdPause />);
     }
   }
-
-  // logger.info(timerTime.getHours());
 
   function handleReset() {
     if (segment === "timer") {
       setTimeToggle(false);
       setMinutes(45);
       setSeconds(0);
-      setStartButton("Start");
+      setStartButton(<FaPlay />);
     } else {
       setTimeToggle(false);
       setMinutes(25);
       setSeconds(0);
-      setStartButton("Start");
+      setStartButton(<FaPlay />);
     }
   }
 
