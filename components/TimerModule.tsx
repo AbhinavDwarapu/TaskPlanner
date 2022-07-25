@@ -11,9 +11,11 @@ import {
   Space,
 } from "@mantine/core";
 import { Dispatch, SetStateAction, useState } from "react";
+
 import { GrPowerReset } from "react-icons/gr";
 import { IoMdPause } from "react-icons/io";
 import { FaPlay } from "react-icons/fa";
+
 import padZero from "../utils/timeFormat";
 import theme from "../styles/theme";
 import logger from "../utils/logger";
@@ -37,13 +39,13 @@ const TimerModule = ({
 }: timerProps): JSX.Element => {
   const [segment, setSegment] = useState("timer");
   const [segmentColour, setSegmentColour] =
-    useState<DefaultMantineColor>("custom_green");
+    useState<DefaultMantineColor>("main");
   const [startButton, setStartButton] = useState(<FaPlay />);
 
   function handleSegment(e: string) {
     setSegment(e);
     if (e === "timer") {
-      setSegmentColour("custom_green");
+      setSegmentColour("main");
       logger.info(theme.colors.main[5]);
       setTimeToggle(false);
       setMinutes(45);
