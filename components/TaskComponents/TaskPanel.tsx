@@ -38,7 +38,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
     setTasks(tempTasks);
   }
 
-  function deleteTask(e) {
+  function deleteTask(e: React.MouseEvent<HTMLInputElement>) {
     const tempTasks = [...tasks];
     tempTasks.forEach((currentTask, index, array) => {
       if (e.currentTarget.id === currentTask.id) {
@@ -122,7 +122,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
       <Group position="center" grow>
         <Button
           id={task.id}
-          onClick={(e) => {
+          onClick={(e: any) => {
             completeTask(e);
           }}
           variant="subtle"
@@ -131,7 +131,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
         </Button>
         <Button
           id={task.id}
-          onClick={(e) => {
+          onClick={(e: any) => {
             deleteTask(e);
           }}
           variant="subtle"
