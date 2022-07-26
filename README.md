@@ -18,6 +18,10 @@ Download the project and cd into it. Then run
 ```bash
 pnpm dev
 ```
+or without pnpm,
+```bash
+npm run dev
+```
 
 which will run the development server.
 
