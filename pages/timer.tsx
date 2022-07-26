@@ -70,4 +70,4 @@
 // };
 //
 // export default TimePage;
-// @ts-ignore
+export {};
