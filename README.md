@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# TaskPlanner
 
-First, run the development server:
+A simple timer page which provides a minimal interface to start and stop a timer to work, a timer for break and add tasks to do.
+
+## How to Use TaskPlanner
+
+Press the play/pause button to play and pause the timer. The timer and break buttons at the top switch from the two modes (a 45 minute timer and a 25 minute timer). The red reset button stops the timer and resets the time.
+
+Adding a task is as simple as clicking "Create New Task" and filling in the form. Once created, a task can be set as complete by pressing the checkmark button or can be deleted with the trashcan button. 
+
+## How to Build
+
+Ensure you have the latest [NodeJS](https://nodejs.org/en/) and [pnpm](https://pnpm.io/installation) installed.
+
+Download the project and cd into it. Then run
 
 ```bash
-npm run dev
-# or
-yarn dev
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+which will run the development server.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the timer.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Future Goals
+- A draggable ui library to move tasks around
+- Adding dynamic colours (changing background colours as timer drops, task colours when complete, etc.)
+- Saving tasks and time to local storage
+- Using the Notion API to store and view tasks 
+- Settings panel to change colour scheme, timer values, etc.
+- A Home page!
