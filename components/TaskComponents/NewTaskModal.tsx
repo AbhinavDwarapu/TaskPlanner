@@ -90,6 +90,7 @@ const NewTimerModal = ({
 
   return (
     <Modal
+      id="NewTaskModal"
       opened={opened}
       onClose={() => setOpened(false)}
       centered
@@ -157,6 +158,7 @@ const NewTimerModal = ({
           />
           <Space h="md" />
           <Button
+            id="CreateTaskButton"
             sx={{ float: "right", borderRadius: "24px" }}
             color="custom_green"
             type="submit"

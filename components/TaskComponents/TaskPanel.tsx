@@ -64,6 +64,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
 
   return (
     <Box
+      id="TaskPanel"
       sx={(theme) => ({
         backgroundColor: theme.colors.main[0],
         borderRadius: "24px",
@@ -72,6 +73,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
       })}
     >
       <Box
+        id="TaskName"
         sx={(theme) => ({
           textDecoration: strike,
           fontSize: "2rem",
@@ -81,6 +83,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
         {task.name}
       </Box>
       <Box
+        id="TaskId"
         sx={(theme) => ({
           color: theme.colors.main[1],
           fontSize: "0.75rem",
@@ -89,6 +92,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
         ID: {task.id}
       </Box>
       <Box
+        id="TaskDate"
         sx={(theme) => ({
           color: theme.colors.main[2],
           fontSize: "0.9rem",
@@ -97,6 +101,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
         {date}
       </Box>
       <Box
+        id="TaskTime"
         sx={(theme) => ({
           color: theme.colors.main[2],
           fontSize: "0.9rem",
@@ -112,6 +117,7 @@ const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
         })}
       />
       <Box
+        id="TaskDescription"
         sx={(theme) => ({
           textAlign: "justify",
           color: theme.colors.main[9],

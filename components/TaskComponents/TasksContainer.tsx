@@ -25,6 +25,7 @@ const TasksContainer = ({
     <>
       <MediaQuery largerThan="md" styles={{ width: "700px" }}>
         <Box
+          id="TaskContainerBox"
           sx={(theme) => ({
             margin: "auto",
             width: "90%",
@@ -55,6 +56,7 @@ const TasksContainer = ({
       </MediaQuery>
       <MediaQuery largerThan="md" styles={{ width: "700px" }}>
         <Button
+          id="CreateTaskButton"
           color="main"
           onClick={() => {
             setOpened(true);
