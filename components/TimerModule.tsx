@@ -17,8 +17,7 @@ import { IoMdPause } from "react-icons/io";
 import { FaPlay } from "react-icons/fa";
 
 import padZero from "../utils/timeFormat";
-import theme from "../styles/theme";
-import logger from "../utils/logger";
+// import logger from "../utils/logger";
 
 interface timerProps {
   seconds: number;
@@ -46,7 +45,7 @@ const TimerModule = ({
     setSegment(e);
     if (e === "timer") {
       setSegmentColour("main");
-      logger.info(theme.colors.main[5]);
+
       setTimeToggle(false);
       setMinutes(45);
       setSeconds(0);
@@ -85,8 +84,9 @@ const TimerModule = ({
 
   return (
     <MediaQuery largerThan="md" styles={{ width: "700px" }}>
-      <Box sx={{ margin: "auto", width: "90%" }}>
+      <Box sx={{ margin: "auto", width: "90%" }} id="TimerModuleBox">
         <SegmentedControl
+          id="SegmentControl"
           fullWidth
           radius={24}
           size="lg"
@@ -105,6 +105,7 @@ const TimerModule = ({
         <Space h="md" />
         <MediaQuery smallerThan="md" styles={{ fontSize: "5rem" }}>
           <Center
+            id="TimeView"
             sx={(t) => ({
               backgroundColor: t.colors.main[1],
               height: "200px",
@@ -120,6 +121,7 @@ const TimerModule = ({
         <Grid grow columns={10}>
           <Grid.Col span={8}>
             <Button
+              id="PlayButton"
               sx={() => ({
                 height: "48px",
                 borderRadius: "24px",
@@ -133,6 +135,7 @@ const TimerModule = ({
           </Grid.Col>
           <Grid.Col span={2}>
             <Button
+              id="Reset Button"
               fullWidth
               sx={() => ({
                 height: "48px",
