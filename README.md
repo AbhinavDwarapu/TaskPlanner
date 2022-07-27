@@ -11,7 +11,7 @@ Press the play/pause button to play and pause the timer. The timer and break but
 
 Adding a task is as simple as clicking "Create New Task" and filling in the form. Once created, a task can be set as complete by pressing the checkmark button or can be deleted with the trashcan button. 
 
-## How to Build
+## How to Run
 
 Ensure you have the latest [NodeJS](https://nodejs.org/en/) and [pnpm](https://pnpm.io/installation) installed.
 
