@@ -5,8 +5,7 @@ const breakTime = 25;
 
 describe("Check Link", () => {
   it("Valid Test: Timer Page Exists", () => {
-    cy.visit("http://localhost:3000/timer");
-    cy.url().should("include", "/timer");
+    cy.visit("http://localhost:3000");
   });
 });
 
@@ -99,28 +98,50 @@ describe("Check Task Module", () => {
       });
     });
   });
+  //
+  it("Valid Test: Complete/Uncomplete Task", () => {
+    cy.get("#CreateTaskButton").click();
 
-  it("Valid Test: Complete Task", () => {
-    cy.get("div[id=TaskPanel]")
-      .eq(0)
-      .within(() => {
-        cy.get("Button").eq(0).click();
-        cy.get("div[id=TaskName]")
-          .should("have.css", "text-decoration")
-          .and("include", "line-through");
+    cy.get("div[id=NewTaskModal]").within(() => {
+      cy.get("input").eq(0).type("New Test Task");
+      cy.get("textarea").eq(0).type("New Test Description");
+      cy.get("Button").contains("Create Task").click();
+    });
+    cy.get("div[id=TaskContainerBox").within(() => {
+      cy.get("div[id=TaskPanel]").within(() => {
+        cy.get("div[id=TaskTime]").contains("At");
+        cy.get("div[id=TaskDate]").contains(",");
       });
+    });
+
+    cy.get("div[id=TaskPanel]").within(() => {
+      cy.get("Button").eq(0).click();
+      cy.get("div[id=TaskName]")
+        .should("have.css", "text-decoration")
+        .and("include", "line-through");
+    });
+    cy.get("div[id=TaskPanel]").within(() => {
+      cy.get("Button").eq(0).click();
+      cy.get("div[id=TaskName]")
+        .should("have.css", "text-decoration")
+        .and("not.include", "line-through");
+    });
   });
-  it("Valid Test: Un-Complete Task", () => {
-    cy.get("div[id=TaskPanel]")
-      .eq(0)
-      .within(() => {
-        cy.get("Button").eq(0).click();
-        cy.get("div[id=TaskName]")
-          .should("have.css", "text-decoration")
-          .and("not.include", "line-through");
-      });
-  });
+
   it("Valid Test: Delete Task", () => {
+    cy.get("#CreateTaskButton").click();
+
+    cy.get("div[id=NewTaskModal]").within(() => {
+      cy.get("input").eq(0).type("New Test Task");
+      cy.get("textarea").eq(0).type("New Test Description");
+      cy.get("Button").contains("Create Task").click();
+    });
+    cy.get("div[id=TaskContainerBox").within(() => {
+      cy.get("div[id=TaskPanel]").within(() => {
+        cy.get("div[id=TaskTime]").contains("At");
+        cy.get("div[id=TaskDate]").contains(",");
+      });
+    });
     cy.get("div[id=TaskPanel]")
       .eq(0)
       .within(() => {

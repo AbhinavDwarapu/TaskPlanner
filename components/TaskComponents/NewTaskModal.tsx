@@ -20,21 +20,20 @@ import { BsFillCalendar2CheckFill } from "react-icons/bs";
 import { MdDescription } from "react-icons/md";
 import { AiFillCheckCircle } from "react-icons/ai";
 
-import logger from "../../utils/logger";
 import { TaskFormObj, TaskObj } from "../../utils/types";
 
 interface Props {
   opened: boolean;
   setOpened: Dispatch<SetStateAction<boolean>>;
-  tasks: TaskObj[];
-  setTasks: Dispatch<SetStateAction<TaskObj[]>>;
+  taskStorage: TaskObj[];
+  setTaskStorage: Dispatch<SetStateAction<TaskObj[]>>;
 }
 
 const NewTimerModal = ({
   opened,
   setOpened,
-  tasks,
-  setTasks,
+  taskStorage,
+  setTaskStorage,
 }: Props): JSX.Element => {
   const [timeValue, setTimeValue] = useState(new Date());
 
@@ -82,9 +81,8 @@ const NewTimerModal = ({
       done: false,
     };
 
-    logger.info(data.date);
-    const tempTasks = [...tasks, tempTask];
-    setTasks(tempTasks);
+    const tempTasks = [tempTask, ...taskStorage];
+    setTaskStorage(tempTasks);
     setOpened(false);
   }
 
