@@ -4,48 +4,50 @@ import { FaCheckCircle } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import padZero from "../../utils/timeFormat";
 import { TaskObj } from "../../utils/types";
-import logger from "../../utils/logger";
+// import logger from "../../utils/logger";
 
 interface Props {
   task: TaskObj;
-  tasks: TaskObj[];
-  setTasks: Dispatch<SetStateAction<TaskObj[]>>;
+  taskStorage: TaskObj[];
+  setTaskStorage: Dispatch<SetStateAction<TaskObj[]>>;
 }
 
-const TaskPanel = ({ task, tasks, setTasks }: Props): JSX.Element => {
+const TaskPanel = ({
+  task,
+  taskStorage,
+  setTaskStorage,
+}: Props): JSX.Element => {
   const [strike, setStrike] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
   function completeTask(e: React.MouseEvent<HTMLInputElement>) {
-    const tempTasks = [...tasks];
+    const tempTasks = [...taskStorage];
     tempTasks.forEach((currentTask, index, array) => {
       let tempTask;
       if (e.currentTarget.id === currentTask.id && !currentTask.done) {
-        logger.info("Setting Done True");
         tempTask = currentTask;
         tempTask.done = true;
         setStrike("line-through");
         array.splice(index, 1, tempTask);
       } else if (e.currentTarget.id === currentTask.id && currentTask.done) {
-        logger.info("Setting Done False");
         tempTask = currentTask;
         tempTask.done = false;
         setStrike("");
         array.splice(index, 1, tempTask);
       }
     });
-    setTasks(tempTasks);
+    setTaskStorage(tempTasks);
   }
 
   function deleteTask(e: React.MouseEvent<HTMLInputElement>) {
-    const tempTasks = [...tasks];
+    const tempTasks = [...taskStorage];
     tempTasks.forEach((currentTask, index, array) => {
       if (e.currentTarget.id === currentTask.id) {
         array.splice(index, 1);
       }
     });
-    setTasks(tempTasks);
+    setTaskStorage(tempTasks);
   }
 
   useEffect(() => {

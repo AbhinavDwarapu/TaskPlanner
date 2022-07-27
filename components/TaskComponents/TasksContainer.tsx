@@ -1,59 +1,29 @@
 import { Box, Button, MediaQuery } from "@mantine/core";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { TaskObj } from "../../utils/types";
-// import logger from "../../utils/logger";
+
 import NewTaskModal from "./NewTaskModal";
 
 import TaskPanel from "./TaskPanel";
 
 interface tasksProps {
-  // minutes: number;
-  // seconds: number;
-  tasks: TaskObj[];
-  setTasks: Dispatch<SetStateAction<TaskObj[]>>;
+  taskStorage: TaskObj[];
+  setTaskStorage: Dispatch<SetStateAction<TaskObj[]>>;
 }
 
 const TasksContainer = ({
-  // minutes,
-  // seconds,
-  tasks,
-  setTasks,
+  taskStorage,
+  setTaskStorage,
 }: tasksProps): JSX.Element => {
   const [opened, setOpened] = useState(false);
+  const [tasks, setTasks] = useState<TaskObj[]>([]);
+
+  useEffect(() => {
+    setTasks(taskStorage);
+  }, [taskStorage]);
 
   return (
     <>
-      <MediaQuery largerThan="md" styles={{ width: "700px" }}>
-        <Box
-          id="TaskContainerBox"
-          sx={(theme) => ({
-            margin: "auto",
-            width: "90%",
-            backgroundColor: theme.colors.main[1],
-            borderRadius: "24px",
-          })}
-        >
-          <Box>
-            {tasks.map((task) => {
-              return (
-                <TaskPanel
-                  key={task.id}
-                  task={task}
-                  tasks={tasks}
-                  setTasks={setTasks}
-                />
-              );
-            })}
-          </Box>
-
-          <NewTaskModal
-            opened={opened}
-            setOpened={setOpened}
-            tasks={tasks}
-            setTasks={setTasks}
-          />
-        </Box>
-      </MediaQuery>
       <MediaQuery largerThan="md" styles={{ width: "700px" }}>
         <Button
           id="CreateTaskButton"
@@ -70,6 +40,37 @@ const TasksContainer = ({
         >
           Create New Task
         </Button>
+      </MediaQuery>
+      <MediaQuery largerThan="md" styles={{ width: "700px" }}>
+        <Box
+          id="TaskContainerBox"
+          sx={(theme) => ({
+            margin: "auto",
+            width: "90%",
+            backgroundColor: theme.colors.main[1],
+            borderRadius: "24px",
+          })}
+        >
+          <Box>
+            {tasks.map((task: TaskObj) => {
+              return (
+                <TaskPanel
+                  key={task.id}
+                  task={task}
+                  taskStorage={taskStorage}
+                  setTaskStorage={setTaskStorage}
+                />
+              );
+            })}
+          </Box>
+
+          <NewTaskModal
+            opened={opened}
+            setOpened={setOpened}
+            taskStorage={taskStorage}
+            setTaskStorage={setTaskStorage}
+          />
+        </Box>
       </MediaQuery>
     </>
   );
