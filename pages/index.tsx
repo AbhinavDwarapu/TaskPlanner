@@ -1,43 +1,47 @@
 import type { NextPage } from "next";
 import { AppShell, Stack } from "@mantine/core";
 import { useEffect, useState } from "react";
+import superjson from "superjson";
+
 // import logger from "../utils/logger";
-import { TaskObj } from "../utils/types";
+import { useLocalStorage } from "@mantine/hooks";
 
 import TimerModule from "../components/TimerModule";
 import TasksContainer from "../components/TaskComponents/TasksContainer";
+import { TaskObj } from "../utils/types";
 // import FooterModule from "../components/AppShell/FooterModule";
 // import HeaderModule from "../components/AppShell/HeaderModule";
 // import Navigation from "../components/AppShell/Navigation";
 
 const HomePage: NextPage = () => {
-  // const [opened, setOpened] = useState(false);
-  const [tasks, setTasks] = useState<TaskObj[]>([]);
+  const [taskStorage, setTaskStorage] = useLocalStorage<TaskObj[]>({
+    key: "storedTasks",
+    defaultValue: [],
+    serialize: superjson.stringify,
+    deserialize: (str) => (str === undefined ? [] : superjson.parse(str)),
+  });
+
+  const [storedSeconds, setStoredSeconds] = useLocalStorage({
+    key: "seconds",
+    defaultValue: 0,
+  });
+  const [storedMinutes, setStoredMinutes] = useLocalStorage({
+    key: "minutes",
+    defaultValue: 45,
+  });
+  const [storedSegment, setStoredSegment] = useLocalStorage({
+    key: "segment",
+    defaultValue: "timer",
+  });
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(45);
-  const [timeToggle, setTimeToggle] = useState(false);
+  const [segment, setSegment] = useState("timer");
 
   useEffect(() => {
-    // eslint-disable-next-line no-undef
-    let timer: string | number | NodeJS.Timer;
-    if (timeToggle) {
-      timer = setInterval(() => {
-        if (seconds === 0 && minutes === 0) {
-          return;
-        }
-        if (seconds === 0) {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-          return;
-        }
-        setSeconds(seconds - 1);
-      }, 1000);
-    }
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [minutes, seconds, timeToggle]);
+    setSeconds(storedSeconds);
+    setMinutes(storedMinutes);
+    setSegment(storedSegment);
+  }, [storedMinutes, storedSeconds, storedSegment]);
 
   return (
     <AppShell
@@ -53,16 +57,14 @@ const HomePage: NextPage = () => {
         <TimerModule
           seconds={seconds}
           minutes={minutes}
-          timeToggle={timeToggle}
-          setSeconds={setSeconds}
-          setMinutes={setMinutes}
-          setTimeToggle={setTimeToggle}
+          segment={segment}
+          setSegment={setStoredSegment}
+          setSeconds={setStoredSeconds}
+          setMinutes={setStoredMinutes}
         />
         <TasksContainer
-          // minutes={minutes}
-          // seconds={seconds}
-          tasks={tasks}
-          setTasks={setTasks}
+          taskStorage={taskStorage}
+          setTaskStorage={setTaskStorage}
         />
       </Stack>
     </AppShell>
