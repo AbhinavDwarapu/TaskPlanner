@@ -10,7 +10,7 @@ import {
   SegmentedControl,
   Space,
 } from "@mantine/core";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { GrPowerReset } from "react-icons/gr";
 import { IoMdPause } from "react-icons/io";
@@ -22,30 +22,56 @@ import padZero from "../utils/timeFormat";
 interface timerProps {
   seconds: number;
   minutes: number;
-  timeToggle: boolean;
+  segment: string;
   setSeconds: Dispatch<SetStateAction<number>>;
   setMinutes: Dispatch<SetStateAction<number>>;
-  setTimeToggle: Dispatch<SetStateAction<boolean>>;
+  setSegment: Dispatch<SetStateAction<string>>;
 }
 
 const TimerModule = ({
   seconds,
   minutes,
-  timeToggle,
+  segment,
   setSeconds,
   setMinutes,
-  setTimeToggle,
+  setSegment,
 }: timerProps): JSX.Element => {
-  const [segment, setSegment] = useState("timer");
   const [segmentColour, setSegmentColour] =
     useState<DefaultMantineColor>("main");
   const [startButton, setStartButton] = useState(<FaPlay />);
+
+  const [timeToggle, setTimeToggle] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    let timer: string | number | NodeJS.Timer;
+    if (timeToggle) {
+      timer = setInterval(() => {
+        if (seconds === 0 && minutes === 0) {
+          return;
+        }
+        if (seconds === 0) {
+          setMinutes(minutes - 1);
+          setSeconds(59);
+          return;
+        }
+        setSeconds(seconds - 1);
+      }, 1000);
+    }
+    if (segment === "timer") {
+      setSegmentColour("main");
+    } else {
+      setSegmentColour("custom_red");
+    }
+    return () => {
+      clearInterval(timer);
+    };
+  }, [minutes, seconds, segment, setMinutes, setSeconds, timeToggle]);
 
   function handleSegment(e: string) {
     setSegment(e);
     if (e === "timer") {
       setSegmentColour("main");
-
       setTimeToggle(false);
       setMinutes(45);
       setSeconds(0);
