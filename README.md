@@ -1,7 +1,9 @@
 
 # TaskPlanner
 
-A simple timer page which provides a minimal interface to start and stop a timer to work, a timer for break and add tasks to do.
+A simple timer page which provides a minimal interface to start and stop a timer to work, a timer for break and add tasks to do. 
+
+Currently deployed [here](https://taskplanning.netlify.app/).
 
 ## How to Use TaskPlanner
 
