@@ -3,17 +3,25 @@ import { AppShell, Stack } from "@mantine/core";
 import { useEffect, useState } from "react";
 import superjson from "superjson";
 
-// import logger from "../utils/logger";
 import { useLocalStorage } from "@mantine/hooks";
 
 import TimerModule from "../components/TimerModule";
 import TasksContainer from "../components/TaskComponents/TasksContainer";
-import { TaskObj } from "../utils/types";
-// import FooterModule from "../components/AppShell/FooterModule";
-// import HeaderModule from "../components/AppShell/HeaderModule";
-// import Navigation from "../components/AppShell/Navigation";
+import { SettingsFormObj, TaskObj } from "../utils/types";
+import SettingsContainer from "../components/SettingsComponents/SettingsContainer";
 
 const HomePage: NextPage = () => {
+  const [settings, setSettings] = useLocalStorage<SettingsFormObj>({
+    key: "settings",
+    defaultValue: {
+      timerMinutes: 45,
+      timerSeconds: 0,
+      breakMinutes: 25,
+      breakSeconds: 0,
+      notifications: true,
+    },
+  });
+
   const [taskStorage, setTaskStorage] = useLocalStorage<TaskObj[]>({
     key: "storedTasks",
     defaultValue: [],
@@ -23,11 +31,11 @@ const HomePage: NextPage = () => {
 
   const [storedSeconds, setStoredSeconds] = useLocalStorage({
     key: "seconds",
-    defaultValue: 0,
+    defaultValue: settings.timerSeconds,
   });
   const [storedMinutes, setStoredMinutes] = useLocalStorage({
     key: "minutes",
-    defaultValue: 45,
+    defaultValue: settings.timerMinutes,
   });
   const [storedSegment, setStoredSegment] = useLocalStorage({
     key: "segment",
@@ -54,13 +62,16 @@ const HomePage: NextPage = () => {
       })}
     >
       <Stack sx={{ textAlign: "center" }}>
+        <SettingsContainer settings={settings} setSettings={setSettings} />
         <TimerModule
           seconds={seconds}
           minutes={minutes}
           segment={segment}
+          settings={settings}
           setSegment={setStoredSegment}
           setSeconds={setStoredSeconds}
           setMinutes={setStoredMinutes}
+          // setSettings={setSettings}
         />
         <TasksContainer
           taskStorage={taskStorage}
