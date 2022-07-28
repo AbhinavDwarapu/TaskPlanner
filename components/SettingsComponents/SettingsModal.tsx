@@ -14,38 +14,67 @@ import {
 } from "@mantine/core";
 import { GrPowerReset } from "react-icons/gr";
 import { BsCheckLg } from "react-icons/bs";
-import { SettingsFormObj } from "../../utils/types";
+import { SettingsFormObj, TaskObj } from "../../utils/types";
 
 interface SettingsProps {
   opened: boolean;
-  // settings: SettingsFormObj;
+  settings: SettingsFormObj;
+  segment: string;
   setOpened: Dispatch<SetStateAction<boolean>>;
   setSettings: Dispatch<SetStateAction<SettingsFormObj>>;
+  setSeconds: Dispatch<SetStateAction<number>>;
+  setMinutes: Dispatch<SetStateAction<number>>;
+  setTaskStorage: Dispatch<SetStateAction<TaskObj[]>>;
 }
 
 const SettingsModal = ({
   opened,
-  // settings,
+  settings,
+  segment,
   setOpened,
   setSettings,
+  setSeconds,
+  setMinutes,
+  setTaskStorage,
 }: SettingsProps): JSX.Element => {
-  // const [value, setValue] = useState(0);
-  // const handlers = useRef<NumberInputHandlers>();
   const [checked, setChecked] = useState(true);
   const theme = useMantineTheme();
+
+  function setTimers(data: SettingsFormObj) {
+    if (segment === "timer") {
+      setMinutes(data.timerMinutes);
+      setSeconds(data.timerSeconds);
+    } else {
+      setMinutes(data.breakMinutes);
+      setSeconds(data.breakSeconds);
+    }
+  }
+
+  function handleDeleteTasks() {
+    setTaskStorage([]);
+    setOpened(false);
+  }
+
+  function handleResetSettings() {
+    // @ts-ignore
+    setSettings(undefined);
+    setTimers(settings);
+    setOpened(false);
+  }
 
   function submitForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const data: SettingsFormObj = {
-      timerMinutes: e.currentTarget.timerMinutes.value,
-      timerSeconds: e.currentTarget.timerSeconds.value,
-      breakMinutes: e.currentTarget.breakMinutes.value,
-      breakSeconds: e.currentTarget.breakSeconds.value,
+      timerMinutes: parseInt(e.currentTarget.timerMinutes.value, 10),
+      timerSeconds: parseInt(e.currentTarget.timerSeconds.value, 10),
+      breakMinutes: parseInt(e.currentTarget.breakMinutes.value, 10),
+      breakSeconds: parseInt(e.currentTarget.breakSeconds.value, 10),
       notifications: e.currentTarget.notif.checked,
     };
 
     setSettings(data);
+    setTimers(data);
     setOpened(false);
   }
 
@@ -75,6 +104,7 @@ const SettingsModal = ({
             <NumberInput
               id="timerMinutes"
               defaultValue={45}
+              value={parseInt(String(settings.timerMinutes), 10)}
               max={99}
               min={0}
               label="Minutes"
@@ -84,6 +114,7 @@ const SettingsModal = ({
             <NumberInput
               id="timerSeconds"
               defaultValue={0}
+              value={parseInt(String(settings.timerSeconds), 10)}
               max={59}
               min={0}
               label="Seconds"
@@ -100,6 +131,7 @@ const SettingsModal = ({
           <NumberInput
             id="breakMinutes"
             defaultValue={25}
+            value={parseInt(String(settings.breakMinutes), 10)}
             max={99}
             min={0}
             label="Minutes"
@@ -109,6 +141,7 @@ const SettingsModal = ({
           <NumberInput
             id="breakSeconds"
             defaultValue={0}
+            value={parseInt(String(settings.breakSeconds), 10)}
             max={59}
             min={0}
             label="Seconds"
@@ -123,6 +156,7 @@ const SettingsModal = ({
         <Space h="sm" />
         <Switch
           id="notif"
+          defaultChecked={settings.notifications}
           sx={{ justifyContent: "center" }}
           color="main"
           radius="sm"
@@ -169,11 +203,20 @@ const SettingsModal = ({
             sx={() => ({
               color: "black",
             })}
+            onClick={() => {
+              handleDeleteTasks();
+            }}
           >
             Delete ALL Tasks
           </Button>
           <Tooltip label="Reset settings">
-            <Button color="custom_red" id="reset">
+            <Button
+              color="custom_red"
+              id="reset"
+              onClick={() => {
+                handleResetSettings();
+              }}
+            >
               <GrPowerReset />
             </Button>
           </Tooltip>

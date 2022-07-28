@@ -62,7 +62,14 @@ const HomePage: NextPage = () => {
       })}
     >
       <Stack sx={{ textAlign: "center" }}>
-        <SettingsContainer settings={settings} setSettings={setSettings} />
+        <SettingsContainer
+          segment={segment}
+          settings={settings}
+          setSettings={setSettings}
+          setSeconds={setStoredSeconds}
+          setMinutes={setStoredMinutes}
+          setTaskStorage={setTaskStorage}
+        />
         <TimerModule
           seconds={seconds}
           minutes={minutes}

@@ -2,16 +2,24 @@ import { Box, Button, MediaQuery } from "@mantine/core";
 import { IoMdSettings } from "react-icons/io";
 import { Dispatch, SetStateAction, useState } from "react";
 import SettingsModal from "./SettingsModal";
-import { SettingsFormObj } from "../../utils/types";
+import { SettingsFormObj, TaskObj } from "../../utils/types";
 
 interface SettingsProps {
+  segment: string;
   settings: SettingsFormObj;
   setSettings: Dispatch<SetStateAction<SettingsFormObj>>;
+  setMinutes: Dispatch<SetStateAction<number>>;
+  setSeconds: Dispatch<SetStateAction<number>>;
+  setTaskStorage: Dispatch<SetStateAction<TaskObj[]>>;
 }
 
 const SettingsContainer = ({
+  segment,
   settings,
   setSettings,
+  setMinutes,
+  setSeconds,
+  setTaskStorage,
 }: SettingsProps): JSX.Element => {
   const [opened, setOpened] = useState(false);
 
@@ -33,8 +41,12 @@ const SettingsContainer = ({
         <SettingsModal
           opened={opened}
           setOpened={setOpened}
-          // settings={settings}
+          settings={settings}
           setSettings={setSettings}
+          segment={segment}
+          setSeconds={setSeconds}
+          setMinutes={setMinutes}
+          setTaskStorage={setTaskStorage}
         />
       </Box>
     </MediaQuery>
