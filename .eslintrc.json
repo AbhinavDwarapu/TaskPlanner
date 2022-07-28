@@ -9,6 +9,7 @@
     "prettier/prettier": "error",
     "react/function-component-definition": 0,
     "react/jsx-filename-extension": 0,
+    "no-unused-vars": 1,
     "import/extensions": [
       "error",
       "ignorePackages",
