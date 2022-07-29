@@ -1,7 +1,7 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-const workTime = 45;
-const breakTime = 25;
+const workTime = "45 00";
+const breakTime = "25 00";
 
 describe("Check Link", () => {
   it("Valid Test: Timer Page Exists", () => {
@@ -23,7 +23,7 @@ describe("Check Timer Module", () => {
       cy.get("Button").eq(0).click();
       cy.wait(1200);
       cy.get("Button").eq(0).click();
-      cy.get("div[id=TimeView]").contains(workTime - 1);
+      cy.get("div[id=TimeView]").contains("44 59");
       cy.get("Button").eq(1).click();
       cy.get("div[id=TimeView]").contains(workTime);
     });
@@ -34,7 +34,7 @@ describe("Check Timer Module", () => {
       cy.get("Button").eq(0).click();
       cy.wait(1200);
       cy.get("Button").eq(0).click();
-      cy.get("div[id=TimeView]").contains(breakTime - 1);
+      cy.get("div[id=TimeView]").contains("24 59");
       cy.get("Button").eq(1).click();
       cy.get("div[id=TimeView]").contains(breakTime);
     });
