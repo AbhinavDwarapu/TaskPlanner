@@ -12,6 +12,8 @@ import {
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
+
+import { showNotification } from "@mantine/notifications";
 import { GrPowerReset } from "react-icons/gr";
 import { BsCheckLg } from "react-icons/bs";
 import { SettingsFormObj, TaskObj } from "../../utils/types";
@@ -53,6 +55,12 @@ const SettingsModal = ({
   function handleDeleteTasks() {
     setTaskStorage([]);
     setOpened(false);
+    showNotification({
+      title: "Deleted!",
+      message: "All tasks have been deleted from your browser storage",
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
+    });
   }
 
   function handleResetSettings() {
@@ -60,6 +68,12 @@ const SettingsModal = ({
     setSettings(undefined);
     setTimers(settings);
     setOpened(false);
+    showNotification({
+      title: "Reset!",
+      message: "Your settings have been reset to their original settings",
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
+    });
   }
 
   function submitForm(e: FormEvent<HTMLFormElement>) {
@@ -96,6 +110,12 @@ const SettingsModal = ({
     setSettings(data);
     setTimers(data);
     setOpened(false);
+    showNotification({
+      title: "Saved!",
+      message: "Your settings have been saved!",
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
+    });
   }
 
   return (
