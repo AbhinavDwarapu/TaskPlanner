@@ -245,6 +245,120 @@ describe("Check Settings Module", () => {
       cy.get("input[id=breakMinutes]").should("have.value", "25");
       cy.get("input[id=breakSeconds]").should("have.value", "0");
       cy.get("input[id=Notif]").should("have.value", "on");
+      cy.get(".mantine-ActionIcon-hover").click();
+    });
+  });
+  it("Invalid Test: Set Timer Minutes to Negative Values", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerMinutes]").type("{backspace}{backspace}-1");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerMinutes]").type("{backspace}{backspace}-10");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+  });
+  it("Invalid Test: Set Timer Minutes to Over 99", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerMinutes]").type("{backspace}{backspace}100");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerMinutes]").type("{backspace}{backspace}1000");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+  });
+  it("Invalid Test: Set Timer Seconds to Negative Values", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerSeconds]").type("{backspace}{backspace}-1");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerSeconds]").type("{backspace}{backspace}-10");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+  });
+  it("Invalid Test: Set Timer Minutes to Over 59", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerSeconds]").type("{backspace}{backspace}60");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=timerSeconds]").type("{backspace}{backspace}1000");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+  });
+
+  it("Invalid Test: Set Break Minutes to Negative Values", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakMinutes]").type("{backspace}{backspace}-1");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakMinutes]").type("{backspace}{backspace}-10");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+  });
+  it("Invalid Test: Set Break Minutes to Over 99", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakMinutes]").type("{backspace}{backspace}100");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakMinutes]").type("{backspace}{backspace}1000");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+  });
+  it("Invalid Test: Set Break Seconds to Negative Values", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakSeconds]").type("{backspace}{backspace}-1");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakSeconds]").type("{backspace}{backspace}-10");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+  });
+  it("Invalid Test: Set Break Minutes to Over 59", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakSeconds]").type("{backspace}{backspace}60");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=breakSeconds]").type("{backspace}{backspace}1000");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains(workTime);
     });
   });
 });
