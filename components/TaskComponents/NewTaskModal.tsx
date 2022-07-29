@@ -6,6 +6,7 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
 
 import {
   Dispatch,
@@ -84,6 +85,10 @@ const NewTimerModal = ({
     const tempTasks = [tempTask, ...taskStorage];
     setTaskStorage(tempTasks);
     setOpened(false);
+    showNotification({
+      title: "Created!",
+      message: `Your task "${tempTask.name}" has been created`,
+    });
   }
 
   return (
