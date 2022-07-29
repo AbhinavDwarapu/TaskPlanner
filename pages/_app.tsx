@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -19,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
-        <Component {...pageProps} />
+        <NotificationsProvider limit={2}>
+          <Component {...pageProps} />
+        </NotificationsProvider>
       </MantineProvider>
     </>
   );
