@@ -70,7 +70,7 @@ const SettingsModal = ({
       timerSeconds: parseInt(e.currentTarget.timerSeconds.value, 10),
       breakMinutes: parseInt(e.currentTarget.breakMinutes.value, 10),
       breakSeconds: parseInt(e.currentTarget.breakSeconds.value, 10),
-      notifications: e.currentTarget.notif.checked,
+      notifications: e.currentTarget.Notif.checked,
     };
 
     setSettings(data);
@@ -80,6 +80,7 @@ const SettingsModal = ({
 
   return (
     <Modal
+      id="SettingsModal"
       opened={opened}
       onClose={() => setOpened(false)}
       title="Settings"
@@ -155,7 +156,7 @@ const SettingsModal = ({
         Notifications
         <Space h="sm" />
         <Switch
-          id="notif"
+          id="Notif"
           defaultChecked={settings.notifications}
           sx={{ justifyContent: "center" }}
           color="main"
@@ -198,7 +199,7 @@ const SettingsModal = ({
         <Space h="xl" />
         <Group sx={{ justifyContent: "center" }}>
           <Button
-            id="deleteTasks"
+            id="DeleteTasks"
             color="custom_red"
             sx={() => ({
               color: "black",
@@ -212,7 +213,7 @@ const SettingsModal = ({
           <Tooltip label="Reset settings">
             <Button
               color="custom_red"
-              id="reset"
+              id="Reset"
               onClick={() => {
                 handleResetSettings();
               }}
@@ -224,7 +225,9 @@ const SettingsModal = ({
         <Space h="xl" />
         <Divider />
         <Space h="xl" />
-        <Button type="submit">Save Settings</Button>
+        <Button type="submit" id="SaveSettingsButton">
+          Save Settings
+        </Button>
       </form>
     </Modal>
   );
