@@ -73,6 +73,26 @@ const SettingsModal = ({
       notifications: e.currentTarget.Notif.checked,
     };
 
+    if (data.timerMinutes > 99 || data.timerMinutes < 0) {
+      setOpened(false);
+      return;
+    }
+
+    if (data.timerSeconds > 59 || data.timerSeconds < 0) {
+      setOpened(false);
+      return;
+    }
+
+    if (data.breakMinutes > 99 || data.breakMinutes < 0) {
+      setOpened(false);
+      return;
+    }
+
+    if (data.breakSeconds > 59 || data.breakSeconds < 0) {
+      setOpened(false);
+      return;
+    }
+
     setSettings(data);
     setTimers(data);
     setOpened(false);
