@@ -97,7 +97,6 @@ const NewTimerModal = ({
       transitionDuration={350}
       transitionTimingFunction="ease"
       overlayOpacity={0.55}
-      color="main"
       styles={(theme) => ({
         modal: {
           borderRadius: "24px",
@@ -105,8 +104,8 @@ const NewTimerModal = ({
         body: {
           color: theme.colors.main[9],
         },
-        header: {
-          text: theme.colors.main[9],
+        title: {
+          color: theme.colors.main[9],
         },
       })}
     >

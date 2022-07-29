@@ -17,27 +17,32 @@ import { IoMdPause } from "react-icons/io";
 import { FaPlay } from "react-icons/fa";
 
 import padZero from "../utils/timeFormat";
+import { SettingsFormObj } from "../utils/types";
 // import logger from "../utils/logger";
 
 interface timerProps {
   seconds: number;
   minutes: number;
   segment: string;
+  settings: SettingsFormObj;
   setSeconds: Dispatch<SetStateAction<number>>;
   setMinutes: Dispatch<SetStateAction<number>>;
   setSegment: Dispatch<SetStateAction<string>>;
+  // setSettings: Dispatch<SetStateAction<SettingsFormObj>>;
 }
 
 const TimerModule = ({
   seconds,
   minutes,
   segment,
+  settings,
   setSeconds,
   setMinutes,
   setSegment,
-}: timerProps): JSX.Element => {
+}: // setSettings,
+timerProps): JSX.Element => {
   const [segmentColour, setSegmentColour] =
-    useState<DefaultMantineColor>("main");
+    useState<DefaultMantineColor>("custom_green");
   const [startButton, setStartButton] = useState(<FaPlay />);
 
   const [timeToggle, setTimeToggle] = useState(false);
@@ -59,7 +64,7 @@ const TimerModule = ({
       }, 1000);
     }
     if (segment === "timer") {
-      setSegmentColour("main");
+      setSegmentColour("custom_green");
     } else {
       setSegmentColour("custom_red");
     }
@@ -71,16 +76,16 @@ const TimerModule = ({
   function handleSegment(e: string) {
     setSegment(e);
     if (e === "timer") {
-      setSegmentColour("main");
+      setSegmentColour("custom_green");
       setTimeToggle(false);
-      setMinutes(45);
-      setSeconds(0);
+      setMinutes(settings.timerMinutes);
+      setSeconds(settings.timerSeconds);
       setStartButton(<FaPlay />);
     } else {
       setSegmentColour("custom_red");
       setTimeToggle(false);
-      setMinutes(25);
-      setSeconds(0);
+      setMinutes(settings.breakMinutes);
+      setSeconds(settings.breakSeconds);
       setStartButton(<FaPlay />);
     }
   }
@@ -97,13 +102,13 @@ const TimerModule = ({
   function handleReset() {
     if (segment === "timer") {
       setTimeToggle(false);
-      setMinutes(45);
-      setSeconds(0);
+      setMinutes(settings.timerMinutes);
+      setSeconds(settings.timerSeconds);
       setStartButton(<FaPlay />);
     } else {
       setTimeToggle(false);
-      setMinutes(25);
-      setSeconds(0);
+      setMinutes(settings.breakMinutes);
+      setSeconds(settings.breakSeconds);
       setStartButton(<FaPlay />);
     }
   }

@@ -10,3 +10,12 @@ export interface TaskFormObj {
 export interface TaskObj extends TaskFormObj {
   id: string;
 }
+
+export interface SettingsFormObj {
+  timerMinutes: number;
+  timerSeconds: number;
+  breakMinutes: number;
+  breakSeconds: number;
+  notifications: boolean;
+  theme?: string;
+}
