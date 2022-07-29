@@ -27,6 +27,7 @@ const SettingsContainer = ({
     <MediaQuery largerThan="md" styles={{ width: "700px" }}>
       <Box sx={{ margin: "auto", width: "90%" }}>
         <Button
+          id="SettingsButton"
           sx={() => ({
             borderRadius: "24px",
             float: "right",
