@@ -183,4 +183,70 @@ describe("Check Task Module", () => {
   });
 });
 
+describe("Check Settings Module", () => {
+  it("Valid Test: Open Settings Modal", () => {
+    cy.get("Button[id=SettingsButton]").click();
+  });
+  it("Valid Test: Change Timer Settings", () => {
+    cy.get("div[id=SettingsModal]").within(() => {
+      cy.get("input[id=timerMinutes]").type("{backspace}{backspace}12");
+      cy.get("input[id=timerSeconds]").type("{backspace}{backspace}12");
+      cy.get("button[id=SaveSettingsButton]").click();
+    });
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=TimeView]").contains("12 12");
+    });
+  });
+  it("Valid Test: Change Break Settings", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("div[id=SettingsModal]").within(() => {
+      cy.get("input[id=breakMinutes]").type("{backspace}{backspace}12");
+      cy.get("input[id=breakSeconds]").type("{backspace}{backspace}12");
+      cy.get("button[id=SaveSettingsButton]").click();
+    });
+    cy.get("div[id=TimerModuleBox]").within(() => {
+      cy.get("div[id=SegmentControl]").contains("Break").click();
+      cy.get("div[id=TimeView]").contains("12 12");
+    });
+  });
+  it("Valid Test: Delete All Tasks", () => {
+    for (let i = 0; i < 3; i += 1) {
+      cy.get("#CreateTaskButton").click();
+      cy.get("div[id=NewTaskModal]").within(() => {
+        cy.get("input").eq(0).type("New Test Task");
+        cy.get("textarea").eq(0).type("New Test Description");
+        cy.get("Button").contains("Create Task").click();
+      });
+    }
+
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("div[id=SettingsModal]").within(() => {
+      cy.get("button[id=DeleteTasks]").type("{backspace}{backspace}12");
+      cy.get("button[id=SaveSettingsButton]").click();
+    });
+    cy.get("div[id=TaskContainerBox").within(() => {
+      cy.get("div[id=TaskPanel]").should("not.exist");
+    });
+  });
+  it("Valid Test: Reset Settings to Default", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("div[id=SettingsModal]").within(() => {
+      cy.get("input[id=timerMinutes]").type("{backspace}{backspace}12");
+      cy.get("input[id=timerSeconds]").type("{backspace}{backspace}12");
+      cy.get("input[id=breakMinutes]").type("{backspace}{backspace}12");
+      cy.get("input[id=breakSeconds]").type("{backspace}{backspace}12");
+      cy.get("input[id=Notif]").uncheck();
+      cy.get("button[id=Reset]").click();
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("div[id=SettingsModal]").within(() => {
+      cy.get("input[id=timerMinutes]").should("have.value", "45");
+      cy.get("input[id=timerSeconds]").should("have.value", "0");
+      cy.get("input[id=breakMinutes]").should("have.value", "25");
+      cy.get("input[id=breakSeconds]").should("have.value", "0");
+      cy.get("input[id=Notif]").should("have.value", "on");
+    });
+  });
+});
+
 export {};
