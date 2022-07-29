@@ -17,7 +17,7 @@ import {
 } from "react";
 import { DatePicker, TimeInput } from "@mantine/dates";
 import { HiClock } from "react-icons/hi";
-import { BsFillCalendar2CheckFill } from "react-icons/bs";
+import { BsCheckLg, BsFillCalendar2CheckFill } from "react-icons/bs";
 import { MdDescription } from "react-icons/md";
 import { AiFillCheckCircle } from "react-icons/ai";
 
@@ -88,6 +88,8 @@ const NewTimerModal = ({
     showNotification({
       title: "Created!",
       message: `Your task "${tempTask.name}" has been created`,
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
     });
   }
 

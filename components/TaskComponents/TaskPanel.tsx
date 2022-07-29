@@ -3,6 +3,7 @@ import { Box, Button, Divider, Group } from "@mantine/core";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { showNotification } from "@mantine/notifications";
+import { BsCheckLg } from "react-icons/bs";
 import padZero from "../../utils/timeFormat";
 import { TaskObj } from "../../utils/types";
 // import logger from "../../utils/logger";
@@ -54,6 +55,8 @@ const TaskPanel = ({
     showNotification({
       title: "Deleted!",
       message: `Task "${taskName}" been deleted`,
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
     });
   }
 

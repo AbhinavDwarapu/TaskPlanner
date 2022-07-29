@@ -16,7 +16,6 @@ import {
 import { showNotification } from "@mantine/notifications";
 import { GrPowerReset } from "react-icons/gr";
 import { BsCheckLg } from "react-icons/bs";
-import { IoIosCloseCircle } from "react-icons/io";
 import { SettingsFormObj, TaskObj } from "../../utils/types";
 
 interface SettingsProps {
@@ -59,6 +58,8 @@ const SettingsModal = ({
     showNotification({
       title: "Deleted!",
       message: "All tasks have been deleted from your browser storage",
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
     });
   }
 
@@ -70,6 +71,8 @@ const SettingsModal = ({
     showNotification({
       title: "Reset!",
       message: "Your settings have been reset to their original settings",
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
     });
   }
 
@@ -110,6 +113,8 @@ const SettingsModal = ({
     showNotification({
       title: "Saved!",
       message: "Your settings have been saved!",
+      icon: <BsCheckLg size={12} />,
+      color: "custom_green",
     });
   }
 
