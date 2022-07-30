@@ -18,6 +18,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-cypress: ^2.12.1
   eslint-plugin-prettier: ^4.2.1
+  howler: ^2.2.3
   next: 12.2.2
   pino: ^8.3.0
   pino-pretty: ^8.1.0
@@ -37,6 +38,7 @@ dependencies:
   '@mantine/next': 4.2.12_2gqzyayxaiqf33ltv5ghxbozne
   '@mantine/notifications': 4.2.12_n5fi23fjjzlwcbqhnnpdtjftw4
   dayjs: 1.11.4
+  howler: 2.2.3
   next: 12.2.2_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2245,6 +2247,10 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: false
+
+  /howler/2.2.3:
+    resolution: {integrity: sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==}
     dev: false
 
   /html-dom-parser/1.0.2:
