@@ -29,6 +29,7 @@ const HomePage: NextPage = () => {
       breakMinutes: 25,
       breakSeconds: 0,
       notifications: true,
+      volume: 0.1,
     },
   });
 
@@ -71,14 +72,20 @@ const HomePage: NextPage = () => {
         color: "custom_green",
       });
       if (settings.notifications) {
-        Howler.volume(0.3);
+        Howler.volume(settings.volume / 100);
         soundRef.current.play();
       }
     } else {
       // @ts-ignore
       setBackground(theme.colors.main[0]);
     }
-  }, [settings.notifications, storedMinutes, storedSeconds, storedSegment]);
+  }, [
+    settings.notifications,
+    settings.volume,
+    storedMinutes,
+    storedSeconds,
+    storedSegment,
+  ]);
 
   return (
     <AppShell
