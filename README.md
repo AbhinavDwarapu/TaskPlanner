@@ -11,6 +11,8 @@ Press the play/pause button to play and pause the timer. The timer and break but
 
 Adding a task is as simple as clicking "Create New Task" and filling in the form. Once created, a task can be set as complete by pressing the checkmark button or can be deleted with the trashcan button. 
 
+Settings can be changed in the settings menu, and will be saved to local storage.
+
 ## How to Run
 
 Ensure you have the latest [NodeJS](https://nodejs.org/en/) and [pnpm](https://pnpm.io/installation) installed.
@@ -33,7 +35,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Future Goals
 - A draggable ui library to move tasks around
 - Adding dynamic colours (changing background colours as timer drops, task colours when complete, etc.)
-- Saving tasks and time to local storage
 - Using the Notion API to store and view tasks 
-- Settings panel to change colour scheme, timer values, etc.
+- Import / Export tasks
 - A Home page!
