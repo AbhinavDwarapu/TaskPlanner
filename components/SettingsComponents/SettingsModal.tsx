@@ -107,6 +107,10 @@ const SettingsModal = ({
       setOpened(false);
       return;
     }
+    if (data.volume > 100 || data.volume < 0) {
+      setOpened(false);
+      return;
+    }
 
     setSettings(data);
     setTimers(data);
