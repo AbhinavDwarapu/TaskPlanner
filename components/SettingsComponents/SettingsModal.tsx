@@ -85,6 +85,7 @@ const SettingsModal = ({
       breakMinutes: parseInt(e.currentTarget.breakMinutes.value, 10),
       breakSeconds: parseInt(e.currentTarget.breakSeconds.value, 10),
       notifications: e.currentTarget.Notif.checked,
+      volume: parseInt(e.currentTarget.Volume.value, 10),
     };
 
     if (data.timerMinutes > 99 || data.timerMinutes < 0) {
@@ -103,6 +104,10 @@ const SettingsModal = ({
     }
 
     if (data.breakSeconds > 59 || data.breakSeconds < 0) {
+      setOpened(false);
+      return;
+    }
+    if (data.volume > 100 || data.volume < 0) {
       setOpened(false);
       return;
     }
@@ -195,14 +200,26 @@ const SettingsModal = ({
         <Space h="xl" />
         Notifications
         <Space h="sm" />
-        <Switch
-          id="Notif"
-          defaultChecked={settings.notifications}
-          sx={{ justifyContent: "center" }}
-          color="main"
-          radius="sm"
-          size="md"
-        />
+        <Group sx={{ justifyContent: "center", textAlign: "center" }}>
+          <Switch
+            id="Notif"
+            defaultChecked={settings.notifications}
+            sx={{ justifyContent: "center", marginTop: 32 }}
+            color="main"
+            radius="sm"
+            size="lg"
+          />
+          <NumberInput
+            id="Volume"
+            defaultValue={0}
+            value={parseInt(String(settings.volume), 10)}
+            max={100}
+            min={0}
+            label="Volume"
+            hideControls
+            styles={{ input: { width: "4rem", textAlign: "center" } }}
+          />
+        </Group>
         <Space h="xl" />
         <Divider />
         <Space h="xl" />

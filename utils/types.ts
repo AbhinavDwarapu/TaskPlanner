@@ -17,5 +17,6 @@ export interface SettingsFormObj {
   breakMinutes: number;
   breakSeconds: number;
   notifications: boolean;
+  volume: number;
   theme?: string;
 }
