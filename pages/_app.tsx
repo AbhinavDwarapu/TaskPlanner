@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       breakMinutes: 25,
       breakSeconds: 0,
       notifications: true,
+      volume: 50,
     },
   });
 

@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
 import { AppShell, DefaultMantineColor, Stack } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import superjson from "superjson";
 
 import { useLocalStorage } from "@mantine/hooks";
 
 import { showNotification } from "@mantine/notifications";
 import { BsCheckLg } from "react-icons/bs";
+// @ts-ignore
+import { Howl, Howler } from "howler";
 import TimerModule from "../components/TimerModule";
 import TasksContainer from "../components/TaskComponents/TasksContainer";
 import { SettingsFormObj, TaskObj } from "../utils/types";
@@ -14,6 +16,11 @@ import SettingsContainer from "../components/SettingsComponents/SettingsContaine
 import theme from "../styles/theme";
 
 const HomePage: NextPage = () => {
+  const soundRef = useRef(
+    new Howl({
+      src: ["/ding.mp3"],
+    })
+  );
   const [settings, setSettings] = useLocalStorage<SettingsFormObj>({
     key: "settings",
     defaultValue: {
@@ -22,6 +29,7 @@ const HomePage: NextPage = () => {
       breakMinutes: 25,
       breakSeconds: 0,
       notifications: true,
+      volume: 50,
     },
   });
 
@@ -53,22 +61,31 @@ const HomePage: NextPage = () => {
     setSeconds(storedSeconds);
     setMinutes(storedMinutes);
     setSegment(storedSegment);
-    if (theme.colors !== undefined) {
-      if (storedMinutes === 0 && storedSeconds === 0) {
-        // @ts-ignore
-        setBackground(theme.colors.custom_green[1]);
-        showNotification({
-          title: "Done!",
-          message: `Timer has reached 0`,
-          icon: <BsCheckLg size={12} />,
-          color: "custom_green",
-        });
-      } else {
-        // @ts-ignore
-        setBackground(theme.colors.main[0]);
+
+    if (storedMinutes === 0 && storedSeconds === 0) {
+      // @ts-ignore
+      setBackground(theme.colors.custom_green[1]);
+      showNotification({
+        title: "Done!",
+        message: `Timer has reached 0`,
+        icon: <BsCheckLg size={12} />,
+        color: "custom_green",
+      });
+      if (settings.notifications) {
+        Howler.volume(settings.volume / 100);
+        soundRef.current.play();
       }
+    } else {
+      // @ts-ignore
+      setBackground(theme.colors.main[0]);
     }
-  }, [storedMinutes, storedSeconds, storedSegment]);
+  }, [
+    settings.notifications,
+    settings.volume,
+    storedMinutes,
+    storedSeconds,
+    storedSegment,
+  ]);
 
   return (
     <AppShell

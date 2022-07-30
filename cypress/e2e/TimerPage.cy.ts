@@ -228,6 +228,18 @@ describe("Check Settings Module", () => {
       cy.get("div[id=TaskPanel]").should("not.exist");
     });
   });
+  it("Valid Test: Change Volume", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("div[id=SettingsModal]").within(() => {
+      cy.get("input[id=Volume]").type("{backspace}{backspace}12");
+      cy.get("button[id=SaveSettingsButton]").click();
+    });
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("div[id=SettingsModal]").within(() => {
+      cy.get("input[id=Volume]").should("have.value", "12");
+      cy.get(".mantine-ActionIcon-hover").click();
+    });
+  });
   it("Valid Test: Reset Settings to Default", () => {
     cy.get("Button[id=SettingsButton]").click();
     cy.get("div[id=SettingsModal]").within(() => {
@@ -261,6 +273,30 @@ describe("Check Settings Module", () => {
     cy.get("div[id=TimerModuleBox]").within(() => {
       cy.get("div[id=TimeView]").contains(workTime);
     });
+  });
+  it("Invalid Test: Set Volume to Negative Values", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=Volume]").type("{backspace}{backspace}-1");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=Volume]").should("have.value", "50");
+    cy.get("input[id=Volume]").type("{backspace}{backspace}-100");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=Volume]").should("have.value", "50");
+    cy.get(".mantine-ActionIcon-hover").click();
+  });
+  it("Invalid Test: Set Volume to Over 100", () => {
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=Volume]").type("{backspace}{backspace}101");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=Volume]").should("have.value", "50");
+    cy.get("input[id=Volume]").type("{backspace}{backspace}1000");
+    cy.get("button[id=SaveSettingsButton]").click();
+    cy.get("Button[id=SettingsButton]").click();
+    cy.get("input[id=Volume]").should("have.value", "50");
+    cy.get(".mantine-ActionIcon-hover").click();
   });
   it("Invalid Test: Set Timer Minutes to Over 99", () => {
     cy.get("Button[id=SettingsButton]").click();
