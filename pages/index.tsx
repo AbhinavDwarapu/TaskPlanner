@@ -1,14 +1,17 @@
 import type { NextPage } from "next";
-import { AppShell, Stack } from "@mantine/core";
+import { AppShell, DefaultMantineColor, Stack } from "@mantine/core";
 import { useEffect, useState } from "react";
 import superjson from "superjson";
 
 import { useLocalStorage } from "@mantine/hooks";
 
+import { showNotification } from "@mantine/notifications";
+import { BsCheckLg } from "react-icons/bs";
 import TimerModule from "../components/TimerModule";
 import TasksContainer from "../components/TaskComponents/TasksContainer";
 import { SettingsFormObj, TaskObj } from "../utils/types";
 import SettingsContainer from "../components/SettingsComponents/SettingsContainer";
+import theme from "../styles/theme";
 
 const HomePage: NextPage = () => {
   const [settings, setSettings] = useLocalStorage<SettingsFormObj>({
@@ -44,11 +47,27 @@ const HomePage: NextPage = () => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(45);
   const [segment, setSegment] = useState("timer");
+  const [background, setBackground] = useState<DefaultMantineColor>();
 
   useEffect(() => {
     setSeconds(storedSeconds);
     setMinutes(storedMinutes);
     setSegment(storedSegment);
+    if (theme.colors !== undefined) {
+      if (storedMinutes === 0 && storedSeconds === 0) {
+        // @ts-ignore
+        setBackground(theme.colors.custom_green[1]);
+        showNotification({
+          title: "Done!",
+          message: `Timer has reached 0`,
+          icon: <BsCheckLg size={12} />,
+          color: "custom_green",
+        });
+      } else {
+        // @ts-ignore
+        setBackground(theme.colors.main[0]);
+      }
+    }
   }, [storedMinutes, storedSeconds, storedSegment]);
 
   return (
@@ -57,8 +76,8 @@ const HomePage: NextPage = () => {
       // footer={<FooterModule />}
       // header={<HeaderModule opened={opened} setOpened={setOpened} />}
       // navbar={<Navigation opened={opened} />}
-      sx={(theme) => ({
-        backgroundColor: theme.colors.main[0],
+      sx={() => ({
+        backgroundColor: background,
       })}
     >
       <Stack sx={{ textAlign: "center" }}>
