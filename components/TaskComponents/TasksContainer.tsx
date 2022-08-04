@@ -1,5 +1,6 @@
 import { Box, Button, MediaQuery } from "@mantine/core";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Reorder } from "framer-motion";
 import { TaskObj } from "../../utils/types";
 
 import NewTaskModal from "./NewTaskModal";
@@ -51,18 +52,18 @@ const TasksContainer = ({
             borderRadius: "24px",
           })}
         >
-          <Box>
-            {tasks.map((task: TaskObj) => {
-              return (
+          <Reorder.Group values={tasks} onReorder={setTasks}>
+            {tasks.map((task) => (
+              <Reorder.Item as="div" key={task.name} value={task} drag>
                 <TaskPanel
                   key={task.id}
                   task={task}
                   taskStorage={taskStorage}
                   setTaskStorage={setTaskStorage}
                 />
-              );
-            })}
-          </Box>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
 
           <NewTaskModal
             opened={opened}
