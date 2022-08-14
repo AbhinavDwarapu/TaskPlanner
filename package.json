@@ -7,12 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "export": "next build; next export",
+    "sync": "npx cap sync",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "pnpm build; start-server-and-test start http://localhost:3000 cypress",
     "e2e:headless": "pnpm build; start-server-and-test start http://localhost:3000 cypress:headless"
   },
   "dependencies": {
+    "@capacitor/android": "^4.0.1",
+    "@capacitor/core": "^4.0.1",
+    "@capacitor/ios": "^4.0.1",
     "@mantine/core": "^4.2.12",
     "@mantine/dates": "^4.2.12",
     "@mantine/form": "^4.2.12",
@@ -29,6 +34,7 @@
     "superjson": "^1.9.1"
   },
   "devDependencies": {
+    "@capacitor/cli": "^4.0.1",
     "@types/node": "18.0.5",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
